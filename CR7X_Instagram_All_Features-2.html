@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08040f"><title>CR7X</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#05020a;color:#fff;font-family:Arial,sans-serif}.app{max-width:480px;margin:auto;min-height:100vh;background:#090510}
+header{position:sticky;top:0;z-index:9;padding:13px 16px;background:#090510ee;backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #25172d}
+.logo{font-size:29px;font-weight:900;font-style:italic;background:linear-gradient(90deg,#fff,#ff269c,#ff7600);-webkit-background-clip:text;color:transparent}.top{font-size:22px}
+.page{display:none;padding-bottom:75px}.page.active{display:block}.stories{display:flex;gap:12px;overflow:auto;padding:13px;border-bottom:1px solid #25172d}.story{min-width:62px;text-align:center;font-size:11px}.ring{width:58px;height:58px;border-radius:50%;padding:2px;margin:auto;background:linear-gradient(135deg,#ffb000,#ff159b,#7835ff)}.avatar{width:100%;height:100%;border-radius:50%;background:#251b2d;border:2px solid #090510;display:grid;place-items:center;font-size:24px}.card{border-bottom:1px solid #25172d;padding-bottom:10px}.head{display:flex;align-items:center;gap:9px;padding:11px 13px}.head .avatar{width:38px;height:38px}.name{font-weight:700}.muted{font-size:12px;color:#aaa0ad}.more{margin-left:auto}.photo{aspect-ratio:1;background:linear-gradient(135deg,#25113b,#ed198e);display:grid;place-items:center;font-size:75px}.actions{display:flex;gap:18px;padding:10px 14px 3px;font-size:23px}.save{margin-left:auto}.text{padding:2px 14px;font-size:14px;line-height:1.45}.btn{border:0;border-radius:24px;padding:11px 20px;background:linear-gradient(90deg,#ff7900,#ff1493,#8035ff);color:#fff;font-weight:700}.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:63px;background:#090510f5;border-top:1px solid #25172d;display:flex;justify-content:space-around;align-items:center;z-index:10}.tab{font-size:23px;opacity:.55;cursor:pointer}.tab.active{opacity:1}.profile{text-align:center;padding:24px 15px}.big{width:96px;height:96px;padding:3px;border-radius:50%;margin:auto;background:linear-gradient(135deg,#ffb000,#ff159b,#7835ff)}.big div{height:100%;border-radius:50%;background:#251b2d;display:grid;place-items:center;font-size:40px}.stats{display:flex;justify-content:space-around;margin:20px 0}.stats b{display:block;font-size:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.tile{aspect-ratio:1;background:linear-gradient(135deg,#241138,#d91b83);display:grid;place-items:center;font-size:28px}.search{margin:14px 15px;padding:14px;border-radius:14px;border:1px solid #3a2945;background:#130b1d;color:white;width:calc(100% - 30px)}h2{padding:15px;margin:0}.form{padding:25px}.input{width:100%;padding:14px;margin:7px 0;border:1px solid #3a2945;border-radius:13px;background:#130b1d;color:#fff}.center{text-align:center;padding:40px 20px}
+
+.media-preview{width:100%;max-height:360px;object-fit:cover;display:block}
+
+<style id="cr7x-upgrade-css">
+:root{--bg:#090510;--card:#10091a;--line:#2b1a35;--muted:#aaa0ad;--text:#fff}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit}
+body{background:#05020a;color:var(--text)}
+.click{cursor:pointer}
+.navbtn{background:none;border:0;color:#fff;cursor:pointer}
+.iconbtn{background:none;border:0;color:#fff;font-size:22px;cursor:pointer}
+.modal{position:fixed;inset:0;background:#000b;z-index:30;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modalbox{width:min(480px,100%);max-height:85vh;overflow:auto;background:#10091a;border:1px solid #3a2945;border-radius:20px;padding:18px}
+.modalhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.comment{padding:10px 0;border-bottom:1px solid var(--line)}
+.follow{padding:8px 15px;border:0;border-radius:18px;background:#fff;color:#111;font-weight:700}
+.follow.on{background:#3a2945;color:#fff}
+.toast{position:fixed;left:50%;bottom:82px;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:22px;z-index:50;display:none}
+.toast.show{display:block}
+.storyAdd{cursor:pointer}
+.reelCard{position:relative}
+.reelCard video{width:100%;aspect-ratio:9/14;object-fit:cover;background:#000}
+.reelOverlay{position:absolute;left:14px;right:14px;bottom:14px;text-shadow:0 1px 4px #000}
+.exploreGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.exploreGrid>*{aspect-ratio:1;overflow:hidden}
+.exploreGrid img,.exploreGrid video{width:100%;height:100%;object-fit:cover}
+.settingsRow{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line)}
+.switch{width:48px;height:27px;border-radius:20px;background:#444;border:0;position:relative;cursor:pointer}
+.switch:after{content:"";position:absolute;width:21px;height:21px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s}
+.switch.on{background:#ff269c}.switch.on:after{left:24px}
+.notif{display:flex;gap:12px;align-items:center;padding:13px;border-bottom:1px solid var(--line)}
+.chatbox{height:58vh;overflow:auto;border:1px solid var(--line);border-radius:15px;padding:12px}
+.bubble{padding:9px 12px;border-radius:16px;background:#25172d;margin:7px 0;max-width:78%;width:max-content}
+.bubble.me{margin-left:auto;background:linear-gradient(90deg,#ff7900,#ff1493);color:#fff}
+</style>
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">CR7X</div><div class="top">
+<button class="iconbtn" onclick="show('upload')">＋</button>
+<button class="iconbtn" onclick="show('notifications')">♡</button>
+<button class="iconbtn" onclick="show('settings')">☰</button>
+</div></header>
+
+<section id="home" class="page active">
+<div class="stories">
+<div class="story"><div class="ring"><div class="avatar">＋</div></div>Your story</div>
+<div class="story"><div class="ring"><div class="avatar">⚽</div></div>Football</div>
+<div class="story"><div class="ring"><div class="avatar">🌴</div></div>Travel</div>
+<div class="story"><div class="ring"><div class="avatar">🎵</div></div>Music</div>
+<div class="story"><div class="ring"><div class="avatar">🔥</div></div>Trend</div>
+</div>
+<div class="card"><div class="head"><div class="avatar">⚡</div><div><div class="name">cr7x_official ✓</div><div class="muted">CR7X Community</div></div><div class="more">•••</div></div>
+<div class="photo">⚽</div><div class="actions"><span onclick="like(this)">♡</span><span onclick="openComments(this)">💬</span><span onclick="shareCurrent()">↗</span><span class="save" onclick="savePost(this)">🔖</span></div>
+<div class="text"><b class="likecount">12,450</b> likes</div><div class="text"><b>cr7x_official</b> Welcome to CR7X — Share • Connect • Inspire 🚀🔥</div></div>
+<div class="card"><div class="head"><div class="avatar">🌍</div><div><div class="name">travel_diary</div><div class="muted">Bali</div></div></div><div class="photo">🌅</div><div class="actions"><span onclick="like(this)">♡</span><span onclick="openComments(this)">💬</span><span onclick="shareCurrent()">↗</span><span class="save" onclick="savePost(this)">🔖</span></div><div class="text"><b class="likecount">8,921</b> likes</div></div>
+</section>
+
+<section id="reels" class="page"><h2>Reels 🎬</h2><div class="card"><div class="photo" style="aspect-ratio:9/14">▶️</div><div class="actions"><span>♡</span><span>💬</span><span>↗</span></div></div></section>
+
+<section id="upload" class="page">
+<h2>Create Post ➕</h2>
+<div class="form">
+<input id="captionInput" class="input" placeholder="Write a caption...">
+
+<div style="display:flex;gap:10px;margin:12px 0">
+  <label class="btn" style="flex:1;text-align:center;cursor:pointer">
+    📸 Photo
+    <input id="mediaUpload" type="file" accept="image/*,video/*,.mp4,.webm,.mov,.m4v" hidden onchange="previewMedia(this)">
+  </label>
+  <button type="button" class="btn" style="flex:1" onclick="document.getElementById('mediaUpload').click()">🎥 Video</button>
+</div>
+
+<div id="mediaPreview" style="display:none;margin:12px 0;border-radius:14px;overflow:hidden;border:1px solid #3a2945"></div>
+<div id="fileName" class="muted" style="margin:8px 0"></div>
+
+<button type="button" class="btn" onclick="sharePost()">Share Post</button>
+</div>
+</section>
+
+<section id="search" class="page"><h2>Search 🔍</h2><input class="search" placeholder="Search people, reels, hashtags"><div class="center">Try searching <b>CR7</b>, <b>Football</b> or <b>Travel</b>.</div></section>
+
+<section id="chat" class="page"><h2>Messages 💬</h2><div class="head"><div class="avatar">👤</div><div><div class="name">CR7X User</div><div class="muted">Tap to chat</div></div></div><div class="center">Your messages will appear here.</div></section>
+
+<section id="profile" class="page"><div class="profile"><div class="big"><div>👤</div></div><h2>CR7X</h2><div class="muted">@CR7X</div><div class="stats"><div><b>24</b>Posts</div><div><b>1.2K</b>Followers</div><div><b>478</b>Following</div></div><button class="btn">Edit Profile</button></div><div class="grid"><div class="tile">⚡</div><div class="tile">📸</div><div class="tile">🎬</div><div class="tile">🌍</div><div class="tile">🔥</div><div class="tile">❤️</div></div></section>
+
+
+<section id="explore" class="page">
+<h2>Explore 🔎</h2>
+<input id="exploreSearch" class="search" placeholder="Search posts, people, hashtags" oninput="filterExplore(this.value)">
+<div id="exploreGrid" class="exploreGrid" style="padding:2px"></div>
+</section>
+
+<section id="notifications" class="page">
+<h2>Notifications ❤️</h2>
+<div class="notif"><div class="avatar" style="width:42px;height:42px">⚡</div><div><b>CR7X Community</b> liked your post.<div class="muted">2m</div></div></div>
+<div class="notif"><div class="avatar" style="width:42px;height:42px">🌍</div><div><b>travel_diary</b> started following you.<div class="muted">18m</div></div><button class="follow" onclick="toggleFollow(this)">Follow</button></div>
+<div class="notif"><div class="avatar" style="width:42px;height:42px">⚽</div><div><b>football_fan</b> mentioned you in a comment.<div class="muted">1h</div></div></div>
+</section>
+
+<section id="settings" class="page">
+<h2>Settings ⚙️</h2>
+<div class="form">
+<div class="settingsRow"><span>Private account</span><button class="switch" onclick="toggleSwitch(this)"></button></div>
+<div class="settingsRow"><span>Notifications</span><button class="switch on" onclick="toggleSwitch(this)"></button></div>
+<div class="settingsRow"><span>Dark mode</span><button class="switch on" onclick="toggleSwitch(this)"></button></div>
+<div class="settingsRow"><span>Save posts automatically</span><button class="switch" onclick="toggleSwitch(this)"></button></div>
+<br><button class="btn" onclick="showToast('Settings saved')">Save Settings</button>
+</div>
+</section>
+
+<section id="chatdetail" class="page">
+<h2>Chat 💬</h2>
+<div class="chatbox" id="chatbox">
+<div class="bubble">Welcome to CR7X 👋</div>
+<div class="bubble">Send a message below.</div>
+</div>
+<div style="display:flex;gap:8px;padding:10px 0">
+<input id="chatInput" class="input" style="margin:0" placeholder="Message...">
+<button class="btn" onclick="sendChat()">Send</button>
+</div>
+</section>
+
+<section id="login" class="page"><div class="center"><div class="logo">CR7X</div><h2>Welcome Back</h2><div class="form"><input class="input" placeholder="Email or username"><input class="input" type="password" placeholder="Password"><button class="btn" onclick="show('home',document.querySelector('.tab'))">Log In</button></div></div></section>
+
+<nav class="tabs">
+<div class="tab active" onclick="show('home',this)">⌂</div>
+<div class="tab" onclick="show('explore',this)">⌕</div>
+<div class="tab" onclick="show('reels',this)">▶</div>
+<div class="tab" onclick="show('upload',this)">＋</div>
+<div class="tab" onclick="show('profile',this)">♙</div>
+</nav>
+</div>
+<script>
+const state={saved:[],comments:[]};
+
+function show(id,el){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const p=document.getElementById(id);
+  if(p)p.classList.add('active');
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  if(el && el.classList.contains('tab'))el.classList.add('active');
+  if(id==='explore')buildExplore();
+  scrollTo(0,0);
+}
+function like(el){
+  el.textContent=el.textContent==='♡'?'♥':'♡';
+  let n=el.parentElement.parentElement.querySelector('.likecount');
+  if(n){let v=parseInt(n.textContent.replace(/,/g,''))||0;n.textContent=(v+(el.textContent==='♥'?1:-1)).toLocaleString();}
+}
+function savePost(el){
+  el.textContent=el.textContent==='🔖'?'🔖':'🔖';
+  showToast('Post saved');
+}
+function shareCurrent(){navigator.clipboard?.writeText(location.href);showToast('Post link copied');}
+function toggleFollow(btn){btn.classList.toggle('on');btn.textContent=btn.classList.contains('on')?'Following':'Follow';}
+function toggleSwitch(btn){btn.classList.toggle('on')}
+function showToast(msg){const t=document.getElementById('toast')||(()=>{const x=document.createElement('div');x.id='toast';x.className='toast';document.body.appendChild(x);return x})();t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+
+function openComments(el){
+  const modal=document.getElementById('commentModal');
+  modal.classList.add('show');
+  document.getElementById('commentInput').focus();
+}
+function closeComments(){document.getElementById('commentModal').classList.remove('show')}
+function addComment(){
+  const input=document.getElementById('commentInput'),v=input.value.trim();
+  if(!v)return;
+  const box=document.getElementById('commentsList');
+  const d=document.createElement('div');d.className='comment';d.innerHTML='<b>CR7X</b> '+escapeHtml(v);
+  box.appendChild(d);input.value='';
+}
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+function sendChat(){
+  const input=document.getElementById('chatInput'),v=input.value.trim();if(!v)return;
+  const box=document.getElementById('chatbox'),d=document.createElement('div');d.className='bubble me';d.textContent=v;box.appendChild(d);input.value='';box.scrollTop=box.scrollHeight;
+  setTimeout(()=>{const r=document.createElement('div');r.className='bubble';r.textContent='Thanks for your message! 💜';box.appendChild(r);box.scrollTop=box.scrollHeight},700);
+}
+
+function buildExplore(){
+  const grid=document.getElementById('exploreGrid');if(!grid||grid.children.length)return;
+  ['⚽','🌅','🔥','🏆','🎵','🌴','❤️','🚀','📸'].forEach((x,i)=>{
+    const d=document.createElement('div');d.className='tile';d.textContent=x;d.dataset.search=(x+' CR7X football travel music trend').toLowerCase();grid.appendChild(d);
+  });
+}
+function filterExplore(q){
+  q=q.toLowerCase();
+  document.querySelectorAll('#exploreGrid>*').forEach(x=>x.style.display=(!q||x.dataset.search.includes(q))?'grid':'none');
+}
+
+function previewMedia(input){
+  const preview=document.getElementById('mediaPreview'),fileName=document.getElementById('fileName'),file=input.files&&input.files[0];
+  if(!file){preview.style.display='none';preview.innerHTML='';fileName.textContent='';return}
+  const url=URL.createObjectURL(file);preview.style.display='block';
+  preview.innerHTML=file.type.startsWith('video/')?'<video class="media-preview" src="'+url+'" controls playsinline></video>':'<img class="media-preview" src="'+url+'" alt="Selected photo">';
+  fileName.textContent='Selected: '+file.name;
+}
+function sharePost(){
+  const input=document.getElementById('mediaUpload'),caption=document.getElementById('captionInput').value.trim(),file=input.files&&input.files[0];
+  if(!file){alert('Please select a photo or video first.');return}
+  const url=URL.createObjectURL(file),card=document.createElement('div');card.className='card';
+  const media=file.type.startsWith('video/')?'<video src="'+url+'" controls playsinline style="width:100%;aspect-ratio:1;object-fit:cover"></video>':'<img src="'+url+'" style="width:100%;aspect-ratio:1;object-fit:cover;display:block">';
+  card.innerHTML='<div class="head"><div class="avatar">👤</div><div><div class="name">CR7X</div><div class="muted">Just now</div></div><div class="more">•••</div></div>'+media+
+  '<div class="actions"><span onclick="like(this)">♡</span><span onclick="openComments(this)">💬</span><span onclick="shareCurrent()">↗</span><span class="save" onclick="savePost(this)">🔖</span></div>'+
+  '<div class="text"><b class="likecount">0</b> likes</div>'+(caption?'<div class="text"><b>CR7X</b> '+escapeHtml(caption)+'</div>':'');
+  document.getElementById('home').querySelector('.stories').insertAdjacentElement('afterend',card);
+  input.value='';document.getElementById('captionInput').value='';document.getElementById('mediaPreview').style.display='none';document.getElementById('mediaPreview').innerHTML='';document.getElementById('fileName').textContent='';
+  show('home',document.querySelector('.tabs .tab'));showToast('Post shared successfully');
+}
+</script>
+
+<div id="commentModal" class="modal" onclick="if(event.target===this)closeComments()">
+ <div class="modalbox">
+  <div class="modalhead"><b>Comments</b><button class="iconbtn" onclick="closeComments()">✕</button></div>
+  <div id="commentsList"><div class="comment"><b>CR7X</b> Welcome to CR7X! 🚀</div></div>
+  <div style="display:flex;gap:8px;margin-top:12px"><input id="commentInput" class="input" style="margin:0" placeholder="Add a comment..."><button class="btn" onclick="addComment()">Post</button></div>
+ </div>
+</div>
+<div id="toast" class="toast"></div>
+</body></html>
